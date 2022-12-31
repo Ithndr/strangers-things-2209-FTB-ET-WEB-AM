@@ -1,3 +1,23 @@
+*{
+  background-color: rgb(216, 229, 255);
+}
 body {
   font-family: verdana;
+
+}
+
+#title{
+  display: flex;
+  justify-content: center;
+}
+
+nav{
+  display: flex;
+  justify-content: space-around;
+  background-color: grey;
+  padding: 25px;
+}
+
+.singlePost{
+  border: 1px solid black;
 }
