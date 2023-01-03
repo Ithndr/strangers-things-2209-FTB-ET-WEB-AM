@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from 'react';
 
-
-
-
-export const createPost = async ({ 
-        token,
-        title,
-        description,
-        price,
-        willDeliver
-    }) => {
+export const createPost = async (
+    title,
+    description,
+    price,
+    willDeliver
+) => {
     try {
+        const token = window.localStorage.getItem('token');
         const response = await fetch('https://strangers-things.herokuapp.com/api/2209-ftb-et-web-am/posts', {
             method: "POST",
             headers: {
@@ -26,5 +22,5 @@ export const createPost = async ({
                 }
             })
         })
-    } catch (error) { }
+    } catch (error) { console.error(error)}
 }

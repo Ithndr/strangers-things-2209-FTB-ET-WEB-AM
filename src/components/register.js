@@ -1,6 +1,5 @@
-import ReactDOM from 'react-dom';
-import React, { useState, useEffect } from 'react';
-import { HashRouter, Routes, Route, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Register = () => {
     const [username, setUsername] = useState('');
@@ -19,13 +18,18 @@ export const Register = () => {
             .then(result => {
                 console.log(result);
                 console.log('Account Created!');
+                const redirectposts = () => {
+                    window.location.href = '/dist/#/posts';
+                }
+                redirectposts();
             })
             .catch(err => console.log(err));
     };
     return (
         <div>
-            <div className='register'>
-                <form onSubmit={register}>
+            <form className='register' onSubmit={register}>
+            <h1>Register</h1>
+                <div className='userPass'>
                     <input
                         placeholder='Username'
                         value={username}
@@ -38,15 +42,11 @@ export const Register = () => {
                         onChange={ev => setPassword(ev.target.value)}
                     />
                     <button>Register</button>
-                </form>
-            </div>
-            <div>
-                <nav>
-                    <Link to='/Login'>
-                        Click here to login.
-                    </Link>
-                </nav>
-            </div>
+                </div>
+                <Link to='/Login'>
+                    Already Have An Account? Click Here.
+                </Link>
+            </form>
         </div>
     );
 };

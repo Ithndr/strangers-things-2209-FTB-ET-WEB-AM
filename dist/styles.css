@@ -1,5 +1,5 @@
 *{
-  background-color: rgb(216, 229, 255);
+  background-color: rgb(237, 237, 237);
 }
 body {
   font-family: verdana;
@@ -11,13 +11,76 @@ body {
   justify-content: center;
 }
 
-nav{
+.navBar{
   display: flex;
   justify-content: space-around;
-  background-color: grey;
+  border-bottom: 2px solid black;
   padding: 25px;
+}
+.navBar > Link{
+  text-decoration: none;
 }
 
 .singlePost{
+  display: flex;
   border: 1px solid black;
+  border-radius: 5px;
+  width: 350px;
+  height: 350px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+}
+.myPost{
+  background-color: rgb(200, 200, 200);
+  display: flex;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 350px;
+  height: 350px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+}
+.postPage{
+  display: flex;
+  flex-wrap: wrap;
+}
+.postBox{
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.createSideBar{
+  display: flex;
+  flex-direction: column;
+}
+.createSideBar > input{
+  width: 300px;
+  height: 50px;
+}
+.createSideBar > button{
+  width: 300px;
+  height: 50px;
+}
+
+.register{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userPass > input{
+  height: 30px;
+}
+.userPass > button{
+  height: 30px;
 }

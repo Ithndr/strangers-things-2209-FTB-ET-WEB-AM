@@ -1,15 +1,17 @@
-import ReactDOM from 'react-dom';
 import React, { useState, useEffect } from 'react';
-import { HashRouter, Routes, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export const Login = () => {
+export const Login = (props) => {
+  const user = props.user;
+  const setUser = props.setUser;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState({});
+  const message = 'Login'
 
   useEffect(() => {
     const token = window.localStorage.getItem('token');
-    if (token) {
+    console.log(token)
+    try {
       fetch('https://strangers-things.herokuapp.com/api/2209-FTB-ET-WEB-AM/users/me', {
         headers: {
           'Content-Type': 'application/json',
@@ -18,10 +20,11 @@ export const Login = () => {
       })
         .then(response => response.json())
         .then(result => {
-          const user = result.data;
-          setUser(user);
+          const newUser = result.data;
+          setUser(newUser);
         })
-        .catch(err => console.log(err));
+    } catch (error) {
+      console.error(error);
     }
   }, []);
 
@@ -38,6 +41,7 @@ export const Login = () => {
     })
       .then(response => response.json())
       .then(result => {
+        console.log(result)
         const token = result.data.token;
         window.localStorage.setItem('token', token);
         fetch('https://strangers-things.herokuapp.com/api/2209-FTB-ET-WEB-AM/users/me', {
@@ -50,7 +54,7 @@ export const Login = () => {
           .then(result => {
             const user = result.data;
             setUser(user);
-            console.log('logged in');
+            redirectposts();
           })
           .catch(console.error);
       })
@@ -63,24 +67,33 @@ export const Login = () => {
     console.log('Logged out');
   };
 
+  const redirectposts = () => {
+    window.location.href = '/dist/index.html#/posts';
+  }
+
   return (
-    <div className='login'>
-      <form onSubmit={login}>
+    <div>
+      <form className='login' onSubmit={login} >
         <h1>
-          Login
+          {message}
         </h1>
-        <input
-          placeholder="username"
-          value={username}
-          onChange={(ev) => setUsername(ev.target.value)}
-        />
-        <input
-          placeholder="password"
-          type={'password'}
-          value={password}
-          onChange={(ev) => setPassword(ev.target.value)}
-        />
-        <button disabled={!username || !password}>Login</button>
+        <div className='userPass'>
+          <input
+            placeholder="username"
+            value={username}
+            onChange={(ev) => setUsername(ev.target.value)}
+          />
+          <input
+            placeholder="password"
+            type={'password'}
+            value={password}
+            onChange={(ev) => setPassword(ev.target.value)}
+          />
+          <button disabled={!username || !password}>Login</button>
+        </div>
+        <Link to='/Register'>
+                    Don't Have An Account Yet? Click Here.
+                </Link>
       </form>
     </div>
   );
