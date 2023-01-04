@@ -61,12 +61,6 @@ export const Login = (props) => {
       .catch(err => console.log(err));
   };
 
-  const logout = () => {
-    window.localStorage.removeItem('token')
-    setUser({});
-    console.log('Logged out');
-  };
-
   const redirectposts = () => {
     window.location.href = '/dist/index.html#/posts';
   }
@@ -92,8 +86,8 @@ export const Login = (props) => {
           <button disabled={!username || !password}>Login</button>
         </div>
         <Link to='/Register'>
-                    Don't Have An Account Yet? Click Here.
-                </Link>
+          Don't Have An Account Yet? Click Here.
+        </Link>
       </form>
     </div>
   );

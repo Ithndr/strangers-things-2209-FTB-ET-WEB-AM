@@ -5,14 +5,11 @@ import { ShowPosts } from './components/showPosts';
 import { Login } from './components/login';
 import { Register } from './components/register';
 import { MyPosts } from './components/myPosts';
-
-
+import { SinglePost } from './components/singlePost';
 
 
 const App = () => {
   const [posts, setPosts] = useState([]);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const [user, setUser] = useState({});
 
   useEffect(() => {
@@ -31,22 +28,31 @@ const App = () => {
       .catch(console.error);
     }
     fetchPosts(setPosts);
+    console.log(user);
   }, [])
 
-
+  const logout = () => {
+    window.localStorage.removeItem('token')
+    setUser({});
+    console.log('Logged out');
+    window.location.reload();
+  };
 
   return (
     <div>
       <nav className='navBar'>
         <Link to='/myposts'>My Posts</Link>
-        <Link to='/posts'>Posts ({posts.length})</Link>
+        <Link to='/posts'>All Posts ({posts.length})</Link>
         <Link to='/login'>Login</Link>
         <Link to='/register'>Register</Link>
       </nav>
       <h1 id='title'>Strangers Things</h1>
+      <h3>{user.username}</h3>
+      <button onClick={logout}>Logout</button>
       <Routes>
-        <Route path='/myposts' element={<MyPosts myPosts = {posts}/>} />
-        <Route path='/posts' element={<ShowPosts posts={posts} />} />
+        <Route path='/myposts' element={<MyPosts myPosts = {posts} setUser={setUser}/>} />
+        <Route path='/posts/:id' element={<SinglePost posts={posts} user={user} />} />
+        <Route path='/posts' element={<ShowPosts posts={posts} setUser={setUser}/>} />
         <Route path='/login' element={<Login user={user} setUser={setUser} />} />
         <Route path='/register' element={<Register register={user} />} />
       </Routes>

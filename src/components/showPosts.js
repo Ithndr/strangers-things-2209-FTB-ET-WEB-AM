@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { createPost } from './createPosts';
 import { deletePost } from './deletePost';
-import { message } from './message';
+import { message } from './sendMessage';
+import { Link } from 'react-router-dom';
 
 export const ShowPosts = (props) => {
     const [title, setTitle] = useState('');
@@ -10,6 +11,9 @@ export const ShowPosts = (props) => {
     const [willDeliver, setWillDeliver] = useState(false);
     const [message, setMessage] = useState('');
     const post = props.posts;
+    // const redirectposts = (postID) => {
+    //     window.location.href = `/dist/index.html#/posts/${postID}`;
+    //   }
     return (
         <div className='postPage'>
             <div className='postBox'>
@@ -26,14 +30,9 @@ export const ShowPosts = (props) => {
                                 {post.isAuthor ? <button onClick={ev => console.log('well that doesnt work yet')}>Edit</button> : null}
                                 {post.isAuthor ? <button onClick={ev => { deletePost(post._id); window.location.reload() }}>Delete</button> : null}
                             </div>
-                            {/* <div className='messageBox'>
-                                {post.isAuthor ? null : <input placeholder='Message to seller'
-                                    value={message}
-                                    onChange={(ev) => setMessage(ev.target.value)}
-                                />}
-                                {post.isAuthor ? null : <button onClick={ev => { message(post._id, message); console.log('message clicked') }}>Send</button>}
-                            </div> */}
-                            <p>post created: {post.createdAt}</p>
+                            {/* {post.isAuthor ? null : <button onClick={ev => { redirectposts(post._id) ; console.log('message clicked') }}>Message Seller</button>} */}
+                            {post.isAuthor ? null : <Link to={`/posts/${post._id}`}>Message Seller</Link>}
+                            <p className='timestamp'>post created: {post.createdAt}</p>
                         </div>
                     );
                 })}

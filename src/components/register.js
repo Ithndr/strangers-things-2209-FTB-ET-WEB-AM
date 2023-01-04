@@ -28,7 +28,7 @@ export const Register = () => {
     return (
         <div>
             <form className='register' onSubmit={register}>
-            <h1>Register</h1>
+                <h1>Register</h1>
                 <div className='userPass'>
                     <input
                         placeholder='Username'

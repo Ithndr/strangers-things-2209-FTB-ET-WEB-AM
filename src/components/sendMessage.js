@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const message = (post_id, message) => {
+export const sendMessage = (post_id, message) => {
     const token = window.localStorage.getItem('token');
     console.log(token)
     fetch(`https://strangers-things.herokuapp.com/api/2209-ftb-et-web-am/posts/${ post_id }/messages`, {

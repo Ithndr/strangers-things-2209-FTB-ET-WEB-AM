@@ -9,6 +9,6 @@ export const deletePost = async (post_id) => {
                 'Authorization': `Bearer ${token}`
             }
         })
-    } catch (error) { console.error(error)}
+    } catch (error) { console.error(error) }
 }
 
