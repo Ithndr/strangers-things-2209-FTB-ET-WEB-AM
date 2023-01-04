@@ -9,15 +9,31 @@ export const ShowPosts = (props) => {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [willDeliver, setWillDeliver] = useState(false);
-    const [message, setMessage] = useState('');
     const post = props.posts;
-    // const redirectposts = (postID) => {
-    //     window.location.href = `/dist/index.html#/posts/${postID}`;
-    //   }
+    const [searchTerm, setSearchTerm] = useState('');
+
+    function postMatches(post, text) {
+        if (post.title.includes(text)) {
+            return true;
+        }
+    }
+
+    const filteredPosts = post.filter(post => postMatches(post, searchTerm));
+    const postsToDisplay = searchTerm.length ? filteredPosts : post;
+
     return (
+        <div className='wholePage'>
+        <div className='searchbar'>
+        <input
+            placeholder='search'
+            value={searchTerm}
+            onChange={ev => setSearchTerm(ev.target.value)}
+        >
+        </input>
+    </div>
         <div className='postPage'>
             <div className='postBox'>
-                {post.map((post) => {
+                {postsToDisplay.map((post) => {
                     return (
                         <div
                             key={post._id}
@@ -30,7 +46,6 @@ export const ShowPosts = (props) => {
                                 {post.isAuthor ? <button onClick={ev => console.log('well that doesnt work yet')}>Edit</button> : null}
                                 {post.isAuthor ? <button onClick={ev => { deletePost(post._id); window.location.reload() }}>Delete</button> : null}
                             </div>
-                            {/* {post.isAuthor ? null : <button onClick={ev => { redirectposts(post._id) ; console.log('message clicked') }}>Message Seller</button>} */}
                             {post.isAuthor ? null : <Link to={`/posts/${post._id}`}>Message Seller</Link>}
                             <p className='timestamp'>post created: {post.createdAt}</p>
                         </div>
@@ -66,6 +81,7 @@ export const ShowPosts = (props) => {
                     <label>Will Deliver?</label>
                 </div>
             </div>
+        </div>
         </div>
     )
 }
