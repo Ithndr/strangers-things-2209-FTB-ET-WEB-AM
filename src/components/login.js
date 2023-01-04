@@ -11,6 +11,9 @@ export const Login = (props) => {
   useEffect(() => {
     const token = window.localStorage.getItem('token');
     console.log(token)
+    if (!token) {
+      return
+    }
     try {
       fetch('https://strangers-things.herokuapp.com/api/2209-FTB-ET-WEB-AM/users/me', {
         headers: {
@@ -22,6 +25,7 @@ export const Login = (props) => {
         .then(result => {
           const newUser = result.data;
           setUser(newUser);
+          console.log(newUser)
         })
     } catch (error) {
       console.error(error);

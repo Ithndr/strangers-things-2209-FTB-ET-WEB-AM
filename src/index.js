@@ -50,11 +50,12 @@ const App = () => {
       <h3>{user.username}</h3>
       <button onClick={logout}>Logout</button>
       <Routes>
-        <Route path='/myposts' element={<MyPosts myPosts = {posts} setUser={setUser}/>} />
+        <Route path='/myposts' element={<MyPosts myPosts = {posts} user={user} setUser={setUser}/>} />
         <Route path='/posts/:id' element={<SinglePost posts={posts} user={user} />} />
         <Route path='/posts' element={<ShowPosts posts={posts} setUser={setUser}/>} />
         <Route path='/login' element={<Login user={user} setUser={setUser} />} />
         <Route path='/register' element={<Register register={user} />} />
+
       </Routes>
     </div>
 
