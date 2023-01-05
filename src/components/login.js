@@ -58,7 +58,7 @@ export const Login = (props) => {
           .then(result => {
             const user = result.data;
             setUser(user);
-            redirectposts();
+          //  redirectposts();
           })
           .catch(console.error);
       })

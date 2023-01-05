@@ -55,7 +55,7 @@ export const ShowPosts = (props) => {
             <div className='createSideBar'>
                 <button onClick={ev => {
                     createPost(title, description, price, willDeliver);
-                    window.location.reload()
+                   // window.location.reload()
                 }}>Create New Post</button>
                 <input
                     placeholder="Title"

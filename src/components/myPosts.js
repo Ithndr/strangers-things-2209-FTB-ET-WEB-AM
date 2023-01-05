@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { deletePost } from './deletePost';
 export const MyPosts = (props) => {
     const myPost = props.myPosts;
     const user = props.user;
@@ -21,17 +22,6 @@ export const MyPosts = (props) => {
                                 {post.isAuthor ? <button onClick={ev => { deletePost(post._id); console.log(post._id) }}>Delete</button> : null}
                                 {post.isAuthor ? <button onClick={ev => { console.log('well this doesnt work yet') }}>Edit</button> : null}
                             </div>
-                            {/* {post.messages.map((received) => {
-                                return(
-                                    <div>
-                                        <div>
-                                            <h3>{received.fromUser.username}</h3>
-                                            <p>{received.content}</p>
-                                        </div>
-                                    </div>
-                                )
-                            }
-                            )} */}
                         </div>
                     );
                 }
